@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXIA — Bíblia das Raças</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IM+Fell+English:ital@0;1&display=swap');
+
+        :root {
+            --vazio-absoluto: #050508;
+            --abismo-profundo: #0C0C14;
+            --sombra-densa: #141420;
+            --cinza-abissal: #1E1E2E;
+            --sangue-abismo: #E94560;
+            --luz-perdida: #C9A227;
+            --olho-mar: #0F3460;
+            --veneno-antigo: #6B8E23;
+            --cinza-palido: #E8E8E8;
+            --cinza-morno: #A0A0B0;
+            --cinza-morto: #6B6B7B;
+            --cinza-abissal-texto: #4A4A5A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--vazio-absoluto);
+            color: var(--cinza-palido);
+            font-family: 'Crimson Text', 'Georgia', serif;
+            font-size: 17px;
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+
+        .header-principal {
+            background: linear-gradient(180deg, var(--abismo-profundo) 0%, var(--vazio-absoluto) 100%);
+            border-bottom: 3px solid var(--luz-perdida);
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-principal::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--luz-perdida), transparent);
+        }
+
+        .header-ornamento {
+            font-size: 24px; color: var(--luz-perdida);
+            letter-spacing: 20px; margin-bottom: 20px; opacity: 0.6;
+        }
+
+        .titulo-principal {
+            font-family: 'Cinzel', serif;
+            font-size: 56px; font-weight: 900;
+            color: var(--luz-perdida);
+            letter-spacing: 12px; text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .subtitulo-principal {
+            font-family: 'Cinzel', serif;
+            font-size: 18px; color: var(--cinza-morno);
+            letter-spacing: 6px; text-transform: uppercase; font-weight: 500;
+        }
+
+        .linha-ornamental {
+            width: 200px; height: 2px; margin: 25px auto;
+            background: linear-gradient(90deg, transparent, var(--sangue-abismo), transparent);
+        }
+
+        .descricao-header {
+            max-width: 600px; margin: 0 auto;
+            color: var(--cinza-morno); font-style: italic; font-size: 16px;
+        }
+
+        .nav-racas {
+            background: var(--sombra-densa);
+            border-bottom: 1px solid var(--cinza-abissal);
+            padding: 15px 20px;
+            position: sticky; top: 0; z-index: 100;
+            overflow-x: auto; white-space: nowrap; text-align: center;
+        }
+
+        .nav-racas a {
+            display: inline-block;
+            font-family: 'Cinzel', serif; font-size: 12px;
+            color: var(--cinza-morno); text-decoration: none;
+            padding: 8px 16px; margin: 0 4px;
+            border: 1px solid var(--cinza-abissal); border-radius: 3px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        .nav-racas a:hover {
+            color: var(--luz-perdida); border-color: var(--luz-perdida);
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+        .raca-section { margin-bottom: 80px; animation: fadeInUp 0.8s ease forwards; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .raca-header {
+            background: linear-gradient(135deg, var(--sombra-densa) 0%, var(--abismo-profundo) 100%);
+            border: 1px solid var(--cinza-abissal);
+            border-left: 4px solid var(--luz-perdida);
+            padding: 35px 40px; position: relative;
+        }
+
+        .raca-header::after {
+            content: ''; position: absolute; bottom: 0; right: 0;
+            width: 100px; height: 100px;
+            background: radial-gradient(circle at bottom right, rgba(201, 162, 39, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .raca-numero {
+            font-family: 'Cinzel', serif; font-size: 13px;
+            color: var(--sangue-abismo); letter-spacing: 4px;
+            text-transform: uppercase; margin-bottom: 8px;
+        }
+
+        .raca-titulo {
+            font-family: 'Cinzel', serif; font-size: 36px; font-weight: 800;
+            color: var(--luz-perdida); letter-spacing: 4px;
+            text-transform: uppercase; margin-bottom: 5px;
+        }
+
+        .raca-subtitulo {
+            font-family: 'Cinzel', serif; font-size: 14px;
+            color: var(--cinza-morno); letter-spacing: 2px; font-style: italic;
+        }
+
+        .identidade-card {
+            background: var(--sombra-densa);
+            border: 1px solid var(--cinza-abissal);
+            border-top: none; padding: 30px 40px;
+        }
+
+        .identidade-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px; margin-bottom: 20px;
+        }
+
+        .identidade-item {
+            background: var(--abismo-profundo);
+            border: 1px solid var(--cinza-abissal);
+            padding: 12px 15px; border-radius: 3px;
+        }
+
+        .identidade-label {
+            font-family: 'Cinzel', serif; font-size: 10px;
+            color: var(--cinza-morto); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 4px;
+        }
+
+        .identidade-valor { font-size: 15px; color: var(--cinza-palido); font-weight: 600; }
+
+        .raca-descricao {
+            color: var(--cinza-morno); font-size: 16px; line-height: 1.8;
+            font-style: italic; border-left: 2px solid var(--cinza-abissal);
+            padding-left: 20px;
+        }
+
+        .raca-body {
+            background: var(--abismo-profundo);
+            border: 1px solid var(--cinza-abissal);
+            border-top: none; padding: 35px 40px;
+        }
+
+        .topico { margin-bottom: 30px; }
+
+        .topico-titulo {
+            font-family: 'Cinzel', serif; font-size: 14px;
+            color: var(--luz-perdida); letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 12px;
+            padding-bottom: 8px; border-bottom: 1px solid var(--cinza-abissal);
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .topico-titulo::before { content: '◆'; color: var(--sangue-abismo); font-size: 10px; }
+        .topico p { color: var(--cinza-morno); margin-bottom: 10px; }
+        .topico p strong { color: var(--cinza-palido); }
+
+        .lista-rpg { list-style: none; padding-left: 0; }
+        .lista-rpg li {
+            padding: 6px 0 6px 25px; position: relative;
+            color: var(--cinza-morno);
+            border-bottom: 1px solid rgba(30, 30, 46, 0.5);
+        }
+        .lista-rpg li::before {
+            content: '†'; position: absolute; left: 5px;
+            color: var(--sangue-abismo); font-weight: bold;
+        }
+        .lista-rpg li strong { color: var(--cinza-palido); }
+
+        .subraca-card {
+            background: var(--sombra-densa);
+            border: 1px solid var(--cinza-abissal);
+            border-left: 3px solid var(--olho-mar);
+            padding: 20px 25px; margin-bottom: 15px;
+            border-radius: 0 3px 3px 0; transition: all 0.3s ease;
+        }
+        .subraca-card:hover { border-left-color: var(--luz-perdida); background: rgba(20, 20, 32, 0.8); }
+
+        .subraca-nome {
+            font-family: 'Cinzel', serif; font-size: 16px;
+            color: var(--luz-perdida); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 8px;
+        }
+        .subraca-desc { color: var(--cinza-morno); font-size: 15px; line-height: 1.7; }
+
+        .narrativa-box {
+            background: linear-gradient(135deg, var(--sombra-densa), var(--abismo-profundo));
+            border: 1px solid var(--cinza-abissal);
+            border-top: 2px solid var(--sangue-abismo);
+            padding: 25px 30px; margin-top: 25px; border-radius: 3px;
+        }
+
+        .narrativa-titulo {
+            font-family: 'Cinzel', serif; font-size: 12px;
+            color: var(--sangue-abismo); letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 15px; text-align: center;
+        }
+
+        .narrativa-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px; margin-bottom: 15px;
+        }
+
+        .narrativa-item { display: flex; gap: 10px; align-items: baseline; }
+        .narrativa-label {
+            font-family: 'Cinzel', serif; font-size: 11px;
+            color: var(--cinza-morto); letter-spacing: 1px;
+            text-transform: uppercase; min-width: 90px;
+        }
+        .narrativa-valor { color: var(--cinza-palido); font-size: 14px; }
+
+        .frase-destaque {
+            text-align: center; padding: 20px;
+            border-top: 1px solid var(--cinza-abissal); margin-top: 10px;
+        }
+        .frase-destaque blockquote {
+            font-family: 'IM Fell English', 'Crimson Text', serif;
+            font-style: italic; font-size: 18px;
+            color: var(--luz-perdida); line-height: 1.6;
+        }
+
+        .visao-geral {
+            background: linear-gradient(180deg, var(--abismo-profundo), var(--vazio-absoluto));
+            border: 1px solid var(--cinza-abissal);
+            border-top: 3px solid var(--luz-perdida);
+            padding: 50px 40px; margin-top: 60px;
+        }
+
+        .visao-titulo {
+            font-family: 'Cinzel', serif; font-size: 28px;
+            color: var(--luz-perdida); text-align: center;
+            letter-spacing: 6px; text-transform: uppercase; margin-bottom: 40px;
+        }
+
+        .tabela-racas { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .tabela-racas th {
+            font-family: 'Cinzel', serif; font-size: 11px;
+            color: var(--sangue-abismo); letter-spacing: 2px;
+            text-transform: uppercase; padding: 12px 15px;
+            border-bottom: 2px solid var(--cinza-abissal); text-align: left;
+        }
+        .tabela-racas td {
+            padding: 12px 15px; border-bottom: 1px solid var(--cinza-abissal);
+            color: var(--cinza-morno); font-size: 15px;
+        }
+        .tabela-racas td:first-child {
+            font-family: 'Cinzel', serif; color: var(--luz-perdida);
+            font-weight: 600; letter-spacing: 1px;
+        }
+        .tabela-racas tr:hover td { background: rgba(201, 162, 39, 0.03); }
+
+        .diferencas-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px; margin-top: 30px;
+        }
+        .diferenca-card {
+            background: var(--sombra-densa);
+            border: 1px solid var(--cinza-abissal);
+            padding: 20px; text-align: center;
+            border-radius: 3px; transition: all 0.3s ease;
+        }
+        .diferenca-card:hover { border-color: var(--luz-perdida); transform: translateY(-2px); }
+        .diferenca-raca {
+            font-family: 'Cinzel', serif; font-size: 14px;
+            color: var(--luz-perdida); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 5px;
+        }
+        .diferenca-tema { color: var(--cinza-morno); font-size: 14px; font-style: italic; }
+
+        .perguntas-finais {
+            text-align: center; padding: 40px;
+            margin-top: 40px; border-top: 1px solid var(--cinza-abissal);
+        }
+        .perguntas-finais p {
+            font-family: 'Cinzel', serif; font-size: 16px;
+            color: var(--cinza-morno); letter-spacing: 2px;
+            margin: 10px 0; font-style: italic;
+        }
+        .perguntas-finais p strong { color: var(--luz-perdida); }
+
+        .footer {
+            background: var(--abismo-profundo);
+            border-top: 2px solid var(--cinza-abissal);
+            padding: 40px 20px; text-align: center; margin-top: 60px;
+        }
+        .footer-ornamento {
+            color: var(--luz-perdida); font-size: 20px;
+            letter-spacing: 15px; margin-bottom: 15px; opacity: 0.5;
+        }
+        .footer-texto {
+            font-family: 'Cinzel', serif; font-size: 12px;
+            color: var(--cinza-morto); letter-spacing: 3px; text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .titulo-principal { font-size: 36px; letter-spacing: 6px; }
+            .raca-titulo { font-size: 26px; }
+            .raca-header, .identidade-card, .raca-body { padding: 25px 20px; }
+            .visao-geral { padding: 30px 20px; }
+            .tabela-racas th, .tabela-racas td { padding: 8px 10px; font-size: 13px; }
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--vazio-absoluto); }
+        ::-webkit-scrollbar-thumb { background: var(--cinza-abissal); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--cinza-abissal-texto); }
+        ::selection { background: rgba(201, 162, 39, 0.3); color: var(--cinza-palido); }
+    </style>
+</head>
+<body>
+
+<header class="header-principal">
+    <div class="header-ornamento">⚔ ✦ ⚔</div>
+    <h1 class="titulo-principal">NEXIA</h1>
+    <div class="linha-ornamental"></div>
+    <p class="subtitulo-principal">Bíblia das Raças</p>
+    <p class="descricao-header">Documento de referência das principais raças conhecidas do mundo de Nexia. Um compêndio de identidades, culturas e destinos entrelaçados.</p>
+</header>
+
+<nav class="nav-racas">
+    <a href="#humanos">Humanos</a>
+    <a href="#elfos">Elfos</a>
+    <a href="#demonios">Demônios</a>
+    <a href="#anoes">Anões</a>
+    <a href="#kith">Kith</a>
+    <a href="#marrow">Marrow</a>
+    <a href="#lith">Lith</a>
+    <a href="#brach">Brach</a>
+    <a href="#ghar">Ghar</a>
+    <a href="#vazias">Vazias</a>
+    <a href="#visao-geral">Visão Geral</a>
+</nav>
+
+<div class="container">
+
+<!-- ========== 1. HUMANOS ========== -->
+<section class="raca-section" id="humanos">
+    <div class="raca-header">
+        <div class="raca-numero">Raça I</div>
+        <h2 class="raca-titulo">Humanos</h2>
+        <p class="raca-subtitulo">Os Povos Diversos</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Humanos</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Outros Nomes</div>
+                <div class="identidade-valor">Povos Humanos, Mortais</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Origem</div>
+                <div class="identidade-valor">Desconhecida</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Praticamente todo o mundo</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Muito numerosa</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Humanos são uma das raças mais numerosas e geograficamente distribuídas de Nexia. Não possuem uma característica física, afinidade mágica ou estrutura social que defina todos eles. Sua principal característica é justamente a diversidade.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência</h3>
+            <p>Humanos apresentam enorme variedade física. Existem diferentes tons de pele, tipos de cabelo, cores de olhos, formatos de rosto, alturas e estruturas corporais. Existem povos de pele muito clara, escura, parda e diversas tonalidades intermediárias. <strong>Altura:</strong> aproximadamente 1,50m a 2,00m. <strong>Expectativa de vida:</strong> 70 a 100 anos.</p>
+        </div>
+        <div class="topico">
+            <h3 class="topico-titulo">Sociedade & Cultura</h3>
+            <p>Não existe uma sociedade humana única. Há reinos, impérios, repúblicas, cidades-estado, tribos, comunidades nômades e aldeias. A cultura é extremamente diversificada — algumas valorizam tradição, outras inovação; algumas são religiosas, outras seculares.</p>
+        </div>
+        <div class="topico">
+            <h3 class="topico-titulo">Arquitetura & Tecnologia</h3>
+            <p>Humanos desenvolveram praticamente todos os estilos arquitetônicos conhecidos e são excelentes em adaptar conhecimentos de outras raças. Uma cidade humana pode utilizar tecnologia anã, materiais Ghar, técnicas Brach, minerais Lith ou conhecimentos mágicos de Elfos.</p>
+        </div>
+        <div class="topico">
+            <h3 class="topico-titulo">Magia & Religião</h3>
+            <p>Não possuem afinidade racial específica. Podem aprender diferentes formas de Mana e Lanto. Suas crenças são extremamente diversificadas — religiões relacionadas a entidades, natureza, ancestrais, magia, fenômenos celestes e conceitos.</p>
+        </div>
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Adaptabilidade</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Fragmentação</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Diversidade</span>
+                </div>
+            </div>
+            <div class="narrativa-item" style="margin-bottom: 10px;">
+                <span class="narrativa-label">Contradição:</span>
+                <span class="narrativa-valor">São uma das raças mais comuns, mas nenhum humano representa todos os humanos.</span>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Não existe um jeito certo de ser humano."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 2. ELFOS ========== -->
+<section class="raca-section" id="elfos">
+    <div class="raca-header">
+        <div class="raca-numero">Raça II</div>
+        <h2 class="raca-titulo">Elfos</h2>
+        <p class="raca-subtitulo">Os Povos Antigos</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Elfos</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Outros Nomes</div>
+                <div class="identidade-valor">Povos Élficos</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Origem</div>
+                <div class="identidade-valor">Extremamente antiga e desconhecida</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Diversos ambientes</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Muito numerosa</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Os Elfos são uma das raças mais antigas de Nexia. Algumas de suas histórias começaram antes mesmo de muitos dos reinos atuais existirem. Possuem uma relação profunda com natureza, ciclos do mundo, memória e forças místicas.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência</h3>
+            <p>Elfos possuem aparência humanoide com características próprias. Cabelos e olhos possuem forte relação com sua linhagem. Os cabelos normalmente refletem diretamente sua descendência, enquanto os olhos apresentam maior variedade. <strong>Heterocromia é extremamente comum.</strong></p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">As 12 Linhagens</h3>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Quartzo</div>
+                <p class="subraca-desc">Relacionados ao frio e ao inverno. Podem retirar calor através do toque e congelar a umidade do ar. São comuns em regiões frias.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Tanzanita</div>
+                <p class="subraca-desc">Ligados à penumbra e às sombras. Conseguem utilizar áreas escuras como abrigo e movimentar-se de forma extremamente discreta. Luz intensa pode causar sensação de exposição.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Rubi</div>
+                <p class="subraca-desc">Relacionados ao vulcanismo e ao calor. Seu sangue possui características semelhantes à lava. São intensos e resistentes ao calor, mas o frio representa uma fraqueza significativa.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Diamante Negro</div>
+                <p class="subraca-desc">Associados à escuridão absoluta. Enxergam em ambientes completamente escuros e conseguem perceber coisas escondidas, camufladas ou difíceis de detectar. A luz intensa é dolorosa.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Safira</div>
+                <p class="subraca-desc">Ligados ao mar. Respiram debaixo d'água, compreendem correntes, tempestades e ciclos lunares e possuem forte percepção das marés. A distância prolongada do oceano pode enfraquecê-los.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Diamante</div>
+                <p class="subraca-desc">Relacionados à Lua. Possuem capacidades de cura e purificação. A Lua é vista como testemunha das coisas que acontecem no mundo. Durante a Lua Nova, sua bênção é enfraquecida.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Topázio Imperial</div>
+                <p class="subraca-desc">Artistas e performers. Canções, danças, gestos e apresentações podem influenciar emoções e atenção. A arte pode funcionar como ferramenta, distração ou arma. Possuem forte relação com imagem e expressão.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Citrino</div>
+                <p class="subraca-desc">Engenheiros e pensadores lógicos. Possuem enorme facilidade para estruturas, cálculos, mecanismos e planejamento. Sua principal dificuldade está em compreender intenções emocionais complexas.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Ametista</div>
+                <p class="subraca-desc">Guardiões da memória. Possuem capacidade extraordinária de memorizar páginas, mapas, rostos e acontecimentos. São historiadores e arquivos vivos. Não são naturalmente especializados em combate direto.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Esmeralda</div>
+                <p class="subraca-desc">Ligados às florestas. Podem se comunicar com plantas e animais e influenciar pequenos elementos vivos ao redor. Grandes cidades de pedra e concreto podem causar desconforto e sensação de deslocamento.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Morganita</div>
+                <p class="subraca-desc">Ligados à serenidade. Possuem uma aura capaz de reduzir tensão e desacelerar conflitos. Seguem um princípio de não atacar aqueles que não os atacaram primeiro. Para eles, paz é disciplina.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Água-Marinha</div>
+                <p class="subraca-desc">Guardiões dos recifes e ambientes marinhos. Respiram debaixo d'água, interagem com criaturas marinhas e podem restaurar vitalidade através da água. Precisam manter contato frequente com água.</p>
+            </div>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Cultura & Magia</h3>
+            <p>Elfos possuem uma relação diferente com tempo e memória. Uma década pode representar pouco diante de uma vida que dura séculos. A magia é extremamente importante — cada linhagem possui afinidades próprias relacionadas à sua natureza.</p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Sabedoria</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Distanciamento</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Tempo e memória</span>
+                </div>
+            </div>
+            <div class="narrativa-item" style="margin-bottom: 10px;">
+                <span class="narrativa-label">Contradição:</span>
+                <span class="narrativa-valor">Vivem por séculos, mas continuam incapazes de escapar da passagem do tempo.</span>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Para nós, uma vida longa não torna o tempo infinito. Apenas torna as despedidas mais numerosas."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 3. DEMÔNIOS ========== -->
+<section class="raca-section" id="demonios">
+    <div class="raca-header">
+        <div class="raca-numero">Raça III</div>
+        <h2 class="raca-titulo">Demônios</h2>
+        <p class="raca-subtitulo">Os Estereotipados</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Demônios</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Regiões áridas, desertos, áreas vulcânicas</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Numerosa</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Os Demônios são uma raça frequentemente associada ao mal por outras sociedades. Essa associação, entretanto, é principalmente um estereótipo.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Subraças</h3>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Feros</div>
+                <p class="subraca-desc">Humanoides com características animais. Possuem orelhas, caudas, dentes, olhos ou outras características inspiradas em diferentes animais. Diferentemente dos Kith, não possuem aparência completamente animal.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Gálios</div>
+                <p class="subraca-desc">Demônios caracterizados pelos chifres. Os chifres possuem grande importância cultural. Formato, tamanho, crescimento e ornamentação podem possuir significado pessoal, social ou religioso.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Rubros</div>
+                <p class="subraca-desc">Possuem características vampíricas. Maior sensibilidade à luz solar e historicamente associados à nobreza. São conhecidos por sua capacidade de persuasão, debate e planejamento. São frequentemente chamados de "arquitetos de ideias".</p>
+            </div>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência & Cultura</h3>
+            <p>A pele pode apresentar diversos tons: branco, negro, roxo, azul, rosa, amarelo, laranja, vermelho e outras variações. Demônios tendem a valorizar orgulho, resistência e força de caráter. A cultura varia bastante entre as subraças.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Magia</h3>
+            <p>Possuem afinidade natural com:</p>
+            <ul class="lista-rpg">
+                <li><strong>Mana Pyroclasta:</strong> fogo, calor e fenômenos destrutivos relacionados à energia.</li>
+                <li><strong>Lanto de Catálise:</strong> eletricidade, calor e processos de transformação energética.</li>
+            </ul>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Política — O Combate Divino</h3>
+            <p>São governados por um Rei Demônio. A cada cinco anos ocorre o <strong>Combate Divino</strong>, no qual o rei deve enfrentar um desafiante. Quem vence assume o trono. Caso o mesmo rei permaneça vencedor durante vinte anos consecutivos, pode transmitir o trono automaticamente para seu filho.</p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Orgulho</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Orgulho</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Identidade versus estereótipo</span>
+                </div>
+            </div>
+            <div class="narrativa-item" style="margin-bottom: 10px;">
+                <span class="narrativa-label">Contradição:</span>
+                <span class="narrativa-valor">Uma raça considerada maligna pode possuir indivíduos extremamente nobres.</span>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Você chama de demônio aquilo que nunca tentou compreender."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 4. ANÕES ========== -->
+<section class="raca-section" id="anoes">
+    <div class="raca-header">
+        <div class="raca-numero">Raça IV</div>
+        <h2 class="raca-titulo">Anões</h2>
+        <p class="raca-subtitulo">Os Construtores Eternos</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Anões</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Montanhas e regiões subterrâneas</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Numerosa</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Anões são conhecidos por sua estrutura física compacta, força e enorme tradição de construção. Sua sociedade possui quatro grandes categorias de casas nobres.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência</h3>
+            <p>São baixos, largos e densos. Possuem músculos e ossos extremamente compactos. <strong>Altura aproximada: 1,20m a 1,50m.</strong> Apesar da baixa estatura, possuem grande força física.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">As Quatro Casas Nobres</h3>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Casas de Guerra</div>
+                <p class="subraca-desc">Especializadas em armas, combate, estratégia e defesa.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Casas de Engenho</div>
+                <p class="subraca-desc">Especializadas em tecnologia, engenharia, máquinas, mecanismos e invenções.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Casas de Ouro</div>
+                <p class="subraca-desc">Especializadas em dinheiro, comércio, bancos, contratos e recursos.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Casas de Pedra</div>
+                <p class="subraca-desc">Especializadas em arquitetura, administração, urbanismo e infraestrutura.</p>
+            </div>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Cultura & Arquitetura</h3>
+            <p>Anões valorizam legado, trabalho bem feito, tradição e durabilidade. Uma construção não deve simplesmente funcionar — <strong>ela deve sobreviver ao construtor.</strong> Sua arquitetura é monumental: montanhas e subterrâneos transformados em cidades enormes de pedra, metal e cristal.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Economia & Guerra</h3>
+            <p>Metalurgia, mineração, tecnologia, comércio, construção, armas, bancos e engenharia. Em combate, são especialistas em armaduras, armas pesadas, defesa, cerco e guerra subterrânea.</p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Competência</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Orgulho</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Legado</span>
+                </div>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Se vai durar menos que nós, não vale a pena construir."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 5. KITH ========== -->
+<section class="raca-section" id="kith">
+    <div class="raca-header">
+        <div class="raca-numero">Raça V</div>
+        <h2 class="raca-titulo">Kith</h2>
+        <p class="raca-subtitulo">Os Homens-Fera</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Kith</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Outros Nomes</div>
+                <div class="identidade-valor">Homens-Fera</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Diversos ambientes terrestres</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Numerosa</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Os Kith são uma raça humanoide com características de animais. Apesar da aparência animal, possuem comportamento, inteligência e organização social essencialmente humanos.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Linhagens</h3>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Calidus</div>
+                <p class="subraca-desc">Características caninas.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Felidus</div>
+                <p class="subraca-desc">Características felinas.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Ursinos</div>
+                <p class="subraca-desc">Características de animais associados às florestas.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Serpentinus</div>
+                <p class="subraca-desc">Características de répteis e outros animais de sangue frio.</p>
+            </div>
+
+            <div class="subraca-card">
+                <div class="subraca-nome">◆ Corvinus</div>
+                <p class="subraca-desc">Características de aves e outros animais voadores.</p>
+            </div>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência & Cultura</h3>
+            <p>Possuem corpo humanoide bípede, mas cabeça, pelos, penas, caudas, orelhas ou outras características animais. <strong>A aparência animal não determina personalidade.</strong> Um Felidus não é necessariamente "mais preguiçoso". Um Calidus não é necessariamente leal. A individualidade é extremamente importante.</p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Adaptabilidade</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Preconceito externo</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Aparência versus identidade</span>
+                </div>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Pareço um animal. Isso não significa que eu pense como um."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 6. MARROW ========== -->
+<section class="raca-section" id="marrow">
+    <div class="raca-header">
+        <div class="raca-numero">Raça VI</div>
+        <h2 class="raca-titulo">Marrow</h2>
+        <p class="raca-subtitulo">Os Filhos do Mar</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Marrow</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Oceanos, arquipélagos e regiões costeiras</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Numerosa</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Os Marrow são uma raça profundamente ligada ao mar. Para eles, o oceano não é simplesmente um ambiente. É alimento, caminho, abrigo, religião, memória e identidade.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência</h3>
+            <p>Possuem aparência humanoide, com características que podem lembrar Elfos ou Demônios. Alguns possuem chifres, diferentes formatos de orelhas, guelras e outras adaptações. As cores mais comuns de pele são <strong>azul, verde, rosa e roxo</strong>. Cores quentes como vermelho, amarelo e laranja são menos comuns. Branco e preto são extremamente raros.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Adaptação ao Mar & Comunicação</h3>
+            <p>Seu corpo é adaptado à vida subaquática. Podem viver fora da água, mas precisam receber água regularmente. Seus ouvidos e bocas são adaptados à comunicação subaquática. Sua língua utiliza sons, vibrações, pressão e frequências adequadas ao ambiente marítimo.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Cultura & Religião</h3>
+            <p>O mar influencia praticamente todos os aspectos culturais. Navegação, pesca, marés, tempestades, criaturas marinhas e correntes fazem parte do conhecimento cotidiano. Uma crença comum afirma que <strong>aquilo que é lançado ao mar nunca desaparece completamente</strong>. Tudo permanece em algum lugar dentro dele.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Economia & Guerra</h3>
+            <p>Pesca, algas, pérolas, conchas, corais, minerais, criaturas marinhas, rotas marítimas e objetos recuperados de naufrágios. Em combate, utilizam tridentes, lanças, arpões, redes e armas adaptadas ao ambiente aquático.</p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Adaptabilidade</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Dependência do ambiente aquático</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Pertencimento</span>
+                </div>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"O mundo termina onde o mar começa."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 7. LITH / TRUNDAS ========== -->
+<section class="raca-section" id="lith">
+    <div class="raca-header">
+        <div class="raca-numero">Raça VII</div>
+        <h2 class="raca-titulo">Lith</h2>
+        <p class="raca-subtitulo">Os Trundas — Filhos da Pedra</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Lith</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Nome Popular</div>
+                <div class="identidade-valor">Trundas</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Origem</div>
+                <div class="identidade-valor">Desconhecida</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Montanhas, cavernas, minas</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Aproximadamente 40.000</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Os Lith são seres compostos por pedra, minerais e outros materiais geológicos. São relativamente comuns em comparação aos Ghar, mas ainda possuem uma população pequena. Seus nascimentos são extremamente raros.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Origem</h3>
+            <p>Ninguém sabe exatamente como os Lith surgiram. Uma teoria antiga afirma que surgem quando elementos associados à vida entram em contato: <strong>água, terra, ar, fogo e eletricidade</strong>. Outra teoria moderna sugere que são descendentes de uma raça extremamente antiga que desapareceu e voltou a surgir há poucos séculos. Nenhuma teoria foi comprovada.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência & Longevidade</h3>
+            <p>Seus corpos podem ser formados por diferentes materiais: pedras comuns, cristais, minerais, metais, materiais magmáticos, rochas sedimentares e até estruturas semelhantes a ossos. <strong>Altura: 1,50m a 2,50m.</strong> Podem viver até aproximadamente <strong>2.000 anos</strong>. O envelhecimento pode provocar mudanças na coloração, formação de cristais e camadas minerais.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Sociedade & Magia</h3>
+            <p>Não possuem uma hierarquia universal. Cada comunidade escolhe alguém entre os mais antigos para liderá-la. Possuem maior afinidade com Mana e Lanto relacionados à terra, pedra e minerais. A incidência de <strong>Vessels</strong>, indivíduos capazes de trabalhar tanto com Mana quanto com Lanto, é particularmente alta.</p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Experiência</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Isolamento</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Origem desconhecida</span>
+                </div>
+            </div>
+            <div class="narrativa-item" style="margin-bottom: 10px;">
+                <span class="narrativa-label">Contradição:</span>
+                <span class="narrativa-valor">São antigos o suficiente para lembrar acontecimentos que ninguém mais lembra, mas não sabem explicar a própria origem.</span>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Somos antigos o bastante para lembrar o passado, mas não o bastante para lembrar de onde viemos."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 8. BRACH ========== -->
+<section class="raca-section" id="brach">
+    <div class="raca-header">
+        <div class="raca-numero">Raça VIII</div>
+        <h2 class="raca-titulo">Brach</h2>
+        <p class="raca-subtitulo">Os Arquitetos das Alturas</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Brach</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Regiões montanhosas extremamente elevadas</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Desconhecida</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Os Brach são humanoides caracterizados por possuírem seis braços. Vivem em regiões montanhosas tão elevadas que muitas de suas cidades ficam acima das nuvens.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência</h3>
+            <p>Possuem seis braços e orelhas pontudas inclinadas para baixo. Seu corpo é adaptado às condições extremas de altitude, pressão e vento. Os seis braços não tornam o indivíduo seis vezes mais forte — <strong>a principal vantagem está na coordenação, precisão e capacidade de realizar múltiplas tarefas simultaneamente.</strong></p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Cultura & Arquitetura</h3>
+            <p>A sociedade Brach valoriza planejamento, precisão, equilíbrio e funcionalidade. Construir é uma forma de expressão. Sua arquitetura é vertical e extremamente elaborada: torres, pontes suspensas, passarelas, observatórios e estruturas esculpidas na montanha. Utilizam pedra, madeira, metal e <strong>Aeroglass</strong> — um material leve, resistente e translúcido com aparência iridescente.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Tecnologia</h3>
+            <p>Possuem enorme talento para engenharia, mecânica e construção. Desenvolvem mecanismos, válvulas, sistemas de pressão, ferramentas, máquinas, estruturas móveis, instrumentos e mecanismos movidos pelo vento. O vento também pode ser utilizado para produzir sons através das próprias estruturas.</p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Precisão</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Excesso de planejamento</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Ordem versus caos</span>
+                </div>
+            </div>
+            <div class="narrativa-item" style="margin-bottom: 10px;">
+                <span class="narrativa-label">Contradição:</span>
+                <span class="narrativa-valor">São excelentes em construir sistemas para controlar o mundo, mas o mundo continua sendo imprevisível.</span>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Se pode ser compreendido, pode ser construído."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 9. GHAR ========== -->
+<section class="raca-section" id="ghar">
+    <div class="raca-header">
+        <div class="raca-numero">Raça IX</div>
+        <h2 class="raca-titulo">Ghar</h2>
+        <p class="raca-subtitulo">Os Gentis de Pedra</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Ghar</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Regiões vulcânicas</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Rara</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Os Ghar são seres humanoides formados por matéria rochosa e carbono transformado. Sua aparência pode parecer ameaçadora, mas sua cultura é profundamente associada à gentileza, paciência e cooperação.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">Origem</h3>
+            <p>Os Ghar surgem através de um fenômeno extremamente raro. Em determinadas condições vulcânicas, pressão e temperatura extremas atuam sobre materiais ricos em carbono e minerais que possuem concentrações excepcionais de Mana ou Lanto. <strong>Não basta existir um vulcão — é necessária uma coincidência extremamente específica de condições.</strong></p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência & Vharum</h3>
+            <p>Grandes e robustos, seus corpos são compostos por materiais semelhantes a rocha vulcânica e carbono mineralizado. Fissuras naturais podem existir em sua superfície, por onde escorre o <strong>Vharum</strong> — uma resina natural extremamente valiosa e praticamente impossível de reproduzir artificialmente.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">O Vharum</h3>
+            <p>Pode funcionar como combustível extremamente eficiente, queimando em condições onde outros combustíveis não funcionariam, inclusive em ambientes subaquáticos. Utilizado em forjas, máquinas, armas, processos mágicos, alquimia e objetos de luxo. Formas refinadas produzem uma película translúcida e brilhante sobre metais e pedras — <strong>nobres e colecionadores utilizam Vharum refinado como símbolo de status.</strong></p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">História de Exploração</h3>
+            <p>A existência do Vharum fez com que os Ghar fossem historicamente perseguidos. Outras sociedades tentaram controlar territórios vulcânicos, capturar Ghar e explorar sua produção natural. Isso provocou <strong>escravização, comércio ilegal, guerras territoriais, revoltas e migrações.</strong></p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Cultura</h3>
+            <p>Ghar valorizam fortemente gentileza, paciência, cooperação, proteção, comunidade, respeito pela vida e resiliência. Sua força física é enorme, mas normalmente evitam conflitos desnecessários. Existe uma forte consciência sobre a capacidade destrutiva de seus próprios corpos — <strong>controlar a força é considerado uma virtude.</strong></p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Gentileza</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Vulnerabilidade à exploração</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Gentileza nascida da violência</span>
+                </div>
+            </div>
+            <div class="narrativa-item" style="margin-bottom: 10px;">
+                <span class="narrativa-label">Contradição:</span>
+                <span class="narrativa-valor">Uma das raças fisicamente mais capazes de destruir, mas uma das que mais valorizam a paz.</span>
+            </div>
+            <div class="narrativa-item" style="margin-bottom: 10px;">
+                <span class="narrativa-label">Símbolo:</span>
+                <span class="narrativa-valor">Uma chama protegida dentro de uma pedra.</span>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Aquilo que nasce da dor não precisa continuar causando dor."</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 10. VAZIAS ========== -->
+<section class="raca-section" id="vazias">
+    <div class="raca-header">
+        <div class="raca-numero">Raça X</div>
+        <h2 class="raca-titulo">Vazias</h2>
+        <p class="raca-subtitulo">Os Despertos Sem Memória</p>
+    </div>
+    <div class="identidade-card">
+        <div class="identidade-grid">
+            <div class="identidade-item">
+                <div class="identidade-label">Nome</div>
+                <div class="identidade-valor">Vazias</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Origem</div>
+                <div class="identidade-valor">Objetos inanimados que despertam para a consciência</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">Habitat</div>
+                <div class="identidade-valor">Qualquer lugar</div>
+            </div>
+            <div class="identidade-item">
+                <div class="identidade-label">População</div>
+                <div class="identidade-valor">Desconhecida</div>
+            </div>
+        </div>
+        <p class="raca-descricao">Vazias são objetos que, por algum acontecimento desconhecido, passam a possuir uma alma. Podem ser bonecas, marionetes, estátuas, manequins, autômatos, brinquedos, armaduras, relicários, máquinas ou outros objetos construídos. Ninguém sabe exatamente por que despertam.</p>
+    </div>
+    <div class="raca-body">
+        <div class="topico">
+            <h3 class="topico-titulo">O Despertar</h3>
+            <p>O despertar pode estar relacionado a Mana, Lanto, emoções extremas, morte, magia, acidentes, concentração de energia ou fenômenos desconhecidos. <strong>Não existe uma explicação universal confirmada.</strong></p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Aparência & Memória</h3>
+            <p>A aparência depende do objeto que recebeu a alma. Uma Vazia pode parecer uma boneca, estátua, máquina, manequim ou outra forma artificial. A maioria desperta <strong>sem memórias</strong> — não sabe quem era, de onde veio, por que existe, quem a criou ou qual deveria ser seu propósito. Algumas apresentam fragmentos: sonhos, sensações, palavras, lugares, medos inexplicáveis, afetos por pessoas que nunca conheceram.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">O Nome "Vazia"</h3>
+            <p>O termo é carregado de ironia. São chamadas de Vazias porque não possuem carne, sangue ou órgãos biológicos. <strong>Mas possuem consciência, sentimentos, desejos, medo, personalidade e alma.</strong> A sociedade frequentemente insiste em tratá-las como objetos.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Trabalho, Servidão & Preconceito</h3>
+            <p>Vazias são frequentemente utilizadas como mão de obra barata. Como não precisam necessariamente de alimentação convencional e podem suportar jornadas extremamente longas, são utilizadas em limpeza, transporte, serviços domésticos, entretenimento, oficinas, fábricas, trabalhos perigosos e proteção. Em algumas sociedades são legalmente consideradas propriedade.</p>
+            <p>O preconceito é extremamente forte. <em>"É só uma boneca." "É só uma máquina." "É só uma estátua."</em> Essas frases são utilizadas para justificar abusos. A nobreza possui uma relação particularmente contraditória com elas — algumas famílias desprezam Vazias, outras as utilizam como criadas, guardas, peças decorativas ou símbolos de status.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Cultura & Economia</h3>
+            <p>Não possuem uma cultura única. Algumas comunidades desenvolvem símbolos relacionados a espelhos, máscaras, chaves, portas, fios, bonecas, objetos quebrados e relicários. Algumas Vazias escolhem voluntariamente um objeto ou acessório depois do despertar para representar sua <strong>primeira escolha feita por vontade própria.</strong></p>
+            <p>Algumas trabalham como artesãs, restauradoras, artistas, mecânicas, criadoras ou trabalhadores especializados. Existe também um mercado ilegal relacionado a partes de corpos artificiais e modificações.</p>
+        </div>
+
+        <div class="topico">
+            <h3 class="topico-titulo">Morte</h3>
+            <p>Ninguém sabe exatamente o que acontece quando uma Vazia é destruída. Algumas parecem desaparecer. Outras permanecem conscientes. Existem histórias de Vazias que desapareceram e posteriormente despertaram em outro lugar. <strong>Nada disso foi comprovado.</strong></p>
+        </div>
+
+        <div class="narrativa-box">
+            <div class="narrativa-titulo">Características Narrativas</div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Virtude:</span>
+                    <span class="narrativa-valor">Capacidade de encontrar significado</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Fraqueza:</span>
+                    <span class="narrativa-valor">Falta de identidade e memória</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Tema:</span>
+                    <span class="narrativa-valor">Identidade</span>
+                </div>
+            </div>
+            <div class="narrativa-grid">
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Desejo:</span>
+                    <span class="narrativa-valor">Descobrir quem são</span>
+                </div>
+                <div class="narrativa-item">
+                    <span class="narrativa-label">Medo:</span>
+                    <span class="narrativa-valor">Descobrir que nunca tiveram um propósito</span>
+                </div>
+            </div>
+            <div class="narrativa-item" style="margin-bottom: 10px;">
+                <span class="narrativa-label">Contradição:</span>
+                <span class="narrativa-valor">São tratadas como objetos enquanto possuem consciência.</span>
+            </div>
+            <div class="frase-destaque">
+                <blockquote>"Se eu posso sentir, então por que vocês insistem em me chamar de objeto?"</blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== VISÃO GERAL ========== -->
+<section class="visao-geral" id="visao-geral">
+    <h2 class="visao-titulo">Visão Geral das Raças</h2>
+
+    <table class="tabela-racas">
+        <thead>
+            <tr>
+                <th>Raça</th>
+                <th>Tema</th>
+                <th>Característica Central</th>
+                <th>Grande Questão</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Humanos</td>
+                <td>Diversidade</td>
+                <td>Adaptabilidade</td>
+                <td>O que significa ser humano?</td>
+            </tr>
+            <tr>
+                <td>Elfos</td>
+                <td>Tempo e memória</td>
+                <td>Longevidade e afinidade mística</td>
+                <td>O que acontece quando você vive tempo demais?</td>
+            </tr>
+            <tr>
+                <td>Demônios</td>
+                <td>Identidade versus estereótipo</td>
+                <td>Orgulho e força</td>
+                <td>Quem decide o que é monstruoso?</td>
+            </tr>
+            <tr>
+                <td>Anões</td>
+                <td>Legado</td>
+                <td>Construção e competência</td>
+                <td>O que merece sobreviver a nós?</td>
+            </tr>
+            <tr>
+                <td>Kith</td>
+                <td>Aparência versus identidade</td>
+                <td>Diversidade animal</td>
+                <td>Até que ponto a aparência define alguém?</td>
+            </tr>
+            <tr>
+                <td>Marrow</td>
+                <td>Pertencimento</td>
+                <td>Relação com o mar</td>
+                <td>O que acontece quando seu lar também é parte de você?</td>
+            </tr>
+            <tr>
+                <td>Lith</td>
+                <td>Origem</td>
+                <td>Longevidade mineral</td>
+                <td>Como pode um povo antigo não conhecer o próprio nascimento?</td>
+            </tr>
+            <tr>
+                <td>Brach</td>
+                <td>Ordem versus caos</td>
+                <td>Construção e precisão</td>
+                <td>É possível construir algo capaz de resistir ao imprevisível?</td>
+            </tr>
+            <tr>
+                <td>Ghar</td>
+                <td>Gentileza nascida da violência</td>
+                <td>Força e Vharum</td>
+                <td>Uma origem violenta precisa determinar quem somos?</td>
+            </tr>
+            <tr>
+                <td>Vazias</td>
+                <td>Identidade</td>
+                <td>Consciência sem origem conhecida</td>
+                <td>Se ninguém sabe por que você existe, você ainda pode escolher um propósito?</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="topico-titulo" style="margin-top: 40px; justify-content: center;">As Grandes Diferenças Entre as Raças</h3>
+
+    <div class="diferencas-grid">
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Humanos</div>
+            <div class="diferenca-tema">representam a diversidade</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Elfos</div>
+            <div class="diferenca-tema">representam o tempo</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Demônios</div>
+            <div class="diferenca-tema">representam a identidade diante do preconceito</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Anões</div>
+            <div class="diferenca-tema">representam o legado</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Kith</div>
+            <div class="diferenca-tema">representam a aparência</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Marrow</div>
+            <div class="diferenca-tema">representam o pertencimento</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Lith</div>
+            <div class="diferenca-tema">representam a origem desconhecida</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Brach</div>
+            <div class="diferenca-tema">representam a ordem</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Ghar</div>
+            <div class="diferenca-tema">representam a gentileza</div>
+        </div>
+        <div class="diferenca-card">
+            <div class="diferenca-raca">Vazias</div>
+            <div class="diferenca-tema">representam a existência</div>
+        </div>
+    </div>
+
+    <div class="perguntas-finais">
+        <p>Nenhuma raça precisa ser simplesmente <strong>"melhor"</strong> que outra.</p>
+        <p>Cada uma possui uma maneira diferente de responder às mesmas perguntas fundamentais de Nexia:</p>
+        <p style="margin-top: 25px;"><strong>Quem somos?</strong></p>
+        <p><strong>Por que existimos?</strong></p>
+        <p><strong>O que fazemos com aquilo que recebemos?</strong></p>
+        <p><strong>E o que permanece quando nós desaparecemos?</strong></p>
+    </div>
+</section>
+
+</div><!-- /container -->
+
+<footer class="footer">
+    <div class="footer-ornamento">⚔ ✦ ⚔</div>
+    <p class="footer-texto">NEXIA — Bíblia das Raças</p>
+    <p class="footer-texto" style="margin-top: 8px; font-size: 10px; opacity: 0.6;">Documento de Referência do Mundo</p>
+</footer>
+
+</body>
+</html>
